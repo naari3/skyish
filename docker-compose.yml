@@ -3,7 +3,7 @@ version: "3"
 
 services:
   minecraft:
-    image: itzg/minecraft-server
+    image: itzg/minecraft-server:adopt11
     ports:
       - "25565:25565"
     volumes:

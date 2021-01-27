@@ -6,8 +6,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
 import org.bukkit.generator.BlockPopulator;
 
 public abstract class LuckPopulator extends BlockPopulator {
@@ -56,7 +54,7 @@ public abstract class LuckPopulator extends BlockPopulator {
      * @param c This string may be use for further computation in overriding classes
      */
     public void removeEntities(World w, Random r, Chunk c) {
-        for (Entity entity : c.getEntities()) {
+        for (var entity : c.getEntities()) {
             entity.remove();
         }
     }
@@ -67,10 +65,10 @@ public abstract class LuckPopulator extends BlockPopulator {
      * @param c This string may be use for further computation in overriding classes
      */
     public void removeBlocks(World w, Random r, Chunk c) {
-        for (int x = 0; x < 16; x++) {
-            for (int z = 0; z < 16; z++) {
-                for (int y = 0; y < w.getMaxHeight(); y++) {
-                    Block block = c.getBlock(x, y, z);
+        for (var x = 0; x < 16; x++) {
+            for (var z = 0; z < 16; z++) {
+                for (var y = 0; y < w.getMaxHeight(); y++) {
+                    var block = c.getBlock(x, y, z);
                     block.setType(Material.AIR, false);
                 }
             }
