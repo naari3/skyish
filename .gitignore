@@ -1,0 +1,6 @@
+/server
+/target
+**/.classpath
+**/.project
+**/.settings
+**/.factorypath

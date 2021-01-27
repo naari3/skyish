@@ -1,0 +1,6 @@
+main: com.naari3.skyish.App
+name: Skyish
+version: "0.1"
+api: 1.16.4
+api-version: 1.16
+load: STARTUP
