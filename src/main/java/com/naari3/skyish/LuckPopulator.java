@@ -2,7 +2,6 @@ package com.naari3.skyish;
 
 import java.util.Random;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -11,15 +10,8 @@ import org.bukkit.generator.BlockPopulator;
 public abstract class LuckPopulator extends BlockPopulator {
     private static final int GEN_LUCK = 100; // Frequency is 1 / GEN_LUCK
 
-    private int recursionDepth = 0; // thread-confined
-
     @Override
     public void populate(World w, Random r, Chunk c) {
-        if (recursionDepth >= 1) {
-            Bukkit.getLogger().warning("Skipping block population of chunk: recursion depth exceeded threshold");
-        }
-        ++recursionDepth;
-
         if (skipChunkRemoving(w, r, c)) {
             return;
         }
@@ -28,8 +20,6 @@ public abstract class LuckPopulator extends BlockPopulator {
         removeChunk(w, r, c);
         long end = System.currentTimeMillis();
         System.out.println("Tooks " + (end - start) + "ms");
-
-        --recursionDepth;
     }
 
     /**
