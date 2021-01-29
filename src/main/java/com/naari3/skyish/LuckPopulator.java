@@ -24,7 +24,10 @@ public abstract class LuckPopulator extends BlockPopulator {
             return;
         }
 
+        long start = System.currentTimeMillis();
         removeChunk(w, r, c);
+        long end = System.currentTimeMillis();
+        System.out.println("Tooks " + (end - start) + "ms");
 
         --recursionDepth;
     }
@@ -67,9 +70,12 @@ public abstract class LuckPopulator extends BlockPopulator {
     public void removeBlocks(World w, Random r, Chunk c) {
         for (var x = 0; x < 16; x++) {
             for (var z = 0; z < 16; z++) {
-                for (var y = 0; y < w.getMaxHeight(); y++) {
+                var maxY = w.getHighestBlockYAt(c.getX() * 16 + x, c.getZ() * 16 + z);
+                for (var y = 0; y < maxY + 1; y++) {
                     var block = c.getBlock(x, y, z);
-                    block.setType(Material.AIR, false);
+                    if (block.getType() != Material.AIR) {
+                        block.setType(Material.AIR, false);
+                    }
                 }
             }
         }

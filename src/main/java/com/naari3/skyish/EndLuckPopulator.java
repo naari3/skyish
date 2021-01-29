@@ -21,9 +21,10 @@ public class EndLuckPopulator extends LuckPopulator {
     public void removeBlocks(World w, Random r, Chunk c) {
         for (var x = 0; x < 16; x++) {
             for (var z = 0; z < 16; z++) {
-                for (var y = 0; y < w.getMaxHeight(); y++) {
+                var maxY = w.getHighestBlockYAt(c.getX() * 16 + x, c.getZ() * 16 + z);
+                for (var y = 0; y < maxY + 1; y++) {
                     var block = c.getBlock(x, y, z);
-                    if (block.getType() != Material.IRON_BARS) {
+                    if (block.getType() != Material.AIR || block.getType() != Material.IRON_BARS) {
                         block.setType(Material.AIR, false);
                     }
                 }
